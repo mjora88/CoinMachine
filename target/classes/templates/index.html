@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}"/>
+
+    <title>Dashboard</title>
+</head>
+<body>
+<div class="container">
+
+    <div th:if="${param.error}" class="alert alert-danger">
+        <span>There was a problem saving your product!</span>
+    </div>
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:replace="fragments/sidebarMenu :: sidebarMenu"></div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>Menu</h1>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="product: ${allAvailableProduct}">
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.category.value}"></td>
+                        <td th:text="${product.price}"></td>
+
+                        <td><a th:href="@{'/buy/' + ${product.id}}">Buy</a></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+</div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+<script>
+        $("#wrapper").toggleClass("toggled");
+
+
+</script>
+</body>
+</html>

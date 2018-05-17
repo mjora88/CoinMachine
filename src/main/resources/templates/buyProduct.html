@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}"/>
+
+    <title>Dashboard</title>
+</head>
+<body>
+<div class="container">
+
+    <div th:if="${param.error}" class="alert alert-danger">
+        <span>There was a problem saving your product!</span>
+    </div>
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:replace="fragments/sidebarMenu :: sidebarMenu"></div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>Buy</h1>
+                <h3>You have selected the following product: </h3>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <h4 th:text="${purchaseRequest.product.name} + ', going for  R' + ${purchaseRequest.product.price} + ' in category : ' + ${purchaseRequest.product.category.value}"></h4>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <form th:action="@{/buyNow}" th:object="${purchaseRequest}" method="post">
+                            <input type="hidden" th:field="*{product}"/>
+
+                            <div class="form-group">
+                                <label for="amountEntered">Enter Amount</label>
+                                <input id="amountEntered"
+                                       th:field="*{amountPaid}"
+                                       class="form-control"/>
+                            </div>
+
+                            <div th:if="${purchaseMessage} != null" class="form-group">
+                                <span class="alert alert-danger" th:text="${purchaseMessage}"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Buy Now!</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div th:if="${purchaseResponse} != null" class="row">
+                    <h2>Result Breakdown</h2>
+
+                    <div class="row">
+                        <div class="form-group">
+
+                            <table class="table table-stripped">
+
+                                <tr th:each="response : ${purchaseResponse.changeBreakdown}">
+
+                                    <td class="form-control" th:text="${response}"></td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div th:if="${purchaseResponse.totalChange} > 0" class="row">
+                        <div class="alert alert-success">
+                            Your change is R<span th:text="${purchaseResponse.totalChange}"></span>
+                            Thank you for using our Coin Machine! <p/>
+                            Please remove your product, <span th:text="${purchaseResponse.productName}"> from the machine.</span>
+                        </div>
+                    </div>
+                    <div th:if="${purchaseResponse.totalChange} == 0" class="row">
+                        <div class="alert alert-success">
+
+                            Thank you for using our Coin Machine! <p/>
+                            Please remove your product, <span th:text="${purchaseResponse.productName}"> from the machine.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <p/>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script>
+        $("#wrapper").toggleClass("toggled");
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}"/>
+
+    <title>About</title>
+</head>
+<body>
+<div class="container">
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:replace="fragments/sidebarMenu :: sidebarMenu"></div>
+
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>About this project</h1>
+
+                <div class="row">
+                    <div class="alert alert-info">
+                        <p>
+                            Good day <strong th:text="${userFullNames}"></strong>.
+                        </p>
+                        <br/>
+                        On this page you will have a brief overview of technologies used here! <br/>
+
+                        Alright! Let's kick off with some of the basic concepts that brought this App together!
+
+                        <h5>Dependency Injection</h5>
+                        <p>
+                            Spring Dependency Injection (used with <code>@Autowired</code> annotation) helps you inject
+                            Spring component-objects in your app.
+                            <br/>
+                            A Spring component is any class that Spring has been adviced 'watch' by giving it an
+                            annotation. Its a managed bean. Spring by defaults creates singletons when creating
+                            autowiring
+                        </p>
+
+                        <h5>Inversion of Control</h5>
+                        <p>
+                            In short, IoC is a design pattern that allows the calling class/container to provide their
+                            own dependency version. That is, if you DO NOT hardcode the instance of your dependency in
+                            your components.
+                        </p>
+
+                        <h5>Back end Communication</h5>
+                        <p>
+                            I used <code>@Controller</code> with creates a RESTful API that calls the backend for
+                            operations.
+                        </p>
+
+                        <hr/>
+
+                        <h5>Now let's talk about technologies used</h5>
+
+                        <ol>
+                            <li>Bootstrap 3.7</li>
+                            <li>Spring Boot Web</li>
+                            <li>Spring Boot Security</li>
+                            <li>Spring Boot JPA</li>
+                            <li>Spring Thymeleaf</li>
+                            <li>JQuery</li>
+                            <li>maven</li>
+                            <li>git</li>
+                        </ol>
+
+
+                        <p/>
+                        <h3>
+                            <bold>Now, let me take you through each of the above technologies</bold>
+                        </h3>
+
+                        <h5>Bootstrap 3.7</h5>
+                        <p>
+                            Bootstrap is a CSS framework that makes it easy and convenient to make-up and style-up your
+                            application.<br/>
+                            Developers get to focus on the meat of the project - building the business logic and the
+                            securities around it - not the cosmetics of the application. Since we started using
+                            Bootstrap, we stopped spending too much time in the mirrow :)
+                        </p>
+
+                        <h5>Spring Boot Web</h5>
+                        <p>
+                            JavaEE gives us an API to build web applications. Before SpringBoot-Web, we have to manually
+                            configure the JEE application - defining the web.xml for directives, and going through all
+                            the pain. Now, Spring-Web abstracts that away from the developer to help build efficient
+                            WebApps faster and nicer :)
+                            <br/>
+                            Spring MVC is modeled also by this plugin. It helps resolve templates and manage business
+                            session objects (Controller --> Browser --> Controller)
+                        </p>
+                        <h5>Spring Boot Security</h5>
+                        <p>
+                            It would all be useless to build an application that would be in the public domain without
+                            securing it with the right weapons. Before The Spring guys built this tool, we used to write
+                            web-sessions and managed them manually. Upon successful login , we would create a token for
+                            a
+                            session, and attach it to the HTTP session, and on each back-end request, we would manually
+                            check in some hashtable if the session existed or was not expired.<br/>
+                            Now Spring Security gives us a break from all the fault-prone setup. It takes away this
+                            setup
+                            routine, allowing for a quick application dev - once again!
+
+                        </p>
+
+                        <h5>Spring Boot JPA</h5>
+                        <p>See, Spring always makes sure to respect the rules of Java, and just as always, they follow
+                            the
+                            JRS documents when creating these cool tools. JPA allows us to manage data flow between the
+                            database
+                            and the business logic.<br/>
+                            You'd normally find it in what is commonly known as the <i>Data Layer</i> which sits between
+                            the
+                            business logic and the database. <br/>
+                            We used to write all SQL/MySQl commands and queries and flying them through the JDBC. So,
+                            some
+                            generous guys built a tool called <strong>Hibernate</strong>, which was taking away the pain
+                            of
+                            having to write SQL statements which, you know, most Java Devs would do bad at, and making
+                            sure
+                            that
+                            we focus on Java - what we do best.
+                            <br/>
+                            Then Spring guys took Hibernate a step further - they wrapped Hibernate (which wraps-in JDBC
+                            by
+                            the
+                            way) within their tool (Spring JPA) aka Spring Data. Now Spring Data gives us basic CRUD
+                            operations
+                            without having to write a single line of code. Furthermore, if you have been a good-dev,
+                            following
+                            the JavaBeans standard, SpringData allows you to query your objects using CamelCasing in
+                            your
+                            interface repository method - making sure that you don't live another day to see SQL on your
+                            screen.
+                            You should be worried if you see yourself having to write queries within the SpringData
+                            framework
+                            (yes, they allow you to write your own SQL too - that is to give backward compatibility for
+                            stinking-code hahaha)
+                        </p>
+
+                        <h5>Spring Thymeleaf</h5>
+                        <p>Thymeleaf is just an enhanced version JSP. Just not as beautiful as Angular - just easier to
+                            use
+                            compared to JSP and JSF. But it actually
+                            gives you a front-end display for your business data. This is where we bind business fields
+                            and
+                            object. It is really just a managed HTML
+                        </p>
+
+                        <h5>JQuery</h5>
+                        <p>
+                            I used this JQuery for messing around with the sidebar menu. After some coding, I realised
+                            that
+                            I did not really need it. So I reduced some code from it.
+                            More JQuery was used by Bootstrap - our <i>Makeup Artist</i> to manipulate divs within the
+                            page
+                        </p>
+
+                        <h5>Maven</h5>
+                        <p>
+                            This is our build tool. I could have used other built tools like Ant or gradle. I chose
+                            maven
+                            over Ant because Maven manages my dependencies well. And I did not choose gradle because I
+                            have
+                            not really played with it before, but I heard it is a better than maven. I just don't know
+                            much
+                            of it as yet!
+                        </p>
+                        <h5>Git</h5>
+                        <p>
+                            Version Control System. Git - code sharing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+</div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+<script>
+        $("#wrapper").toggleClass("toggled");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

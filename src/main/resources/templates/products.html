@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}"/>
+
+    <title>Products</title>
+</head>
+<body>
+<div class="container">
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:replace="fragments/sidebarMenu :: sidebarMenu"></div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>Manage Menu</h1>
+
+
+                <form th:action="@{/saveProduct}" th:object="${currentProduct}" method="post">
+
+                    <input th:field="*{id}" type="hidden"/>
+                    <input th:field="*{productCode}" type="hidden"/>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Capture Product Details</div>
+
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="name" class="control-label">Product Name</label>
+                                    <input id="name"
+                                           class="form-control"
+                                           th:field="*{name}"/>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label for="quantity" class="control-label">Quantity</label>
+                                    <input id="quantity"
+                                           class="form-control"
+                                           th:field="*{quantity}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+
+                                <div class="col-md-6">
+                                    <label for="price" class="control-label">Product Price (R)</label>
+                                    <input id="price"
+                                           class="form-control"
+                                           th:field="*{price}"/>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label for="selectCat" class="control-label">Choose Category</label>
+
+                                    <select class="form-control" id="selectCat" th:field="*{category}">
+
+                                        <option th:each="catego : ${allCategories}"
+                                                th:value="${catego}"
+                                                th:utext="${catego.value}"/>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                        <p/>
+                    </div>
+
+
+                </form>
+                <div class="divider"></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class=" panel-title">Current Products</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Edit</th>
+                                <th>Remove</th>
+                            </tr>
+
+
+                            <tr th:each="product : ${allProducts}">
+                                <td th:text="${product.name}"></td>
+                                <td th:text="${product.category.value}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td th:text="${product.quantity}"></td>
+
+
+                                <td><a th:href="@{'/editProduct/' + ${product.id}}">Update</a></td>
+                                <td><a th:href="@{'/delete/' + ${product.id}}">Delete</a></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+</div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script>
+        $("#wrapper").toggleClass("toggled");
+
+</script>
+</body>
+</html>

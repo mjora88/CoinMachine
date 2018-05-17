@@ -1,0 +1,26 @@
+h1 {
+    color: #68dcb5;
+}
+h5 {
+    font-style: normal;
+    color: green;
+}
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+    background-color: #ccc
+}
+
+footer p {
+    padding: 15px;
+}
+
+.error-message {
+    color: #a94442;
+}
+
+.error-message:first-letter {
+    text-transform: capitalize;
+}
